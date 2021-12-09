@@ -20,7 +20,7 @@ export class AppComponent {
   resultsTab = resultsTab;
   currentTab: Tab = this.settingsTab;
 
-  searchFinished = true;
+  searchFinished = false;
 
   constructor(
     private mainService: MainService
@@ -29,6 +29,7 @@ export class AppComponent {
       this.searchFinished = true;
       this.currentTab = resultsTab;
     });
+
     this.mainService.searchStarted.subscribe(() => {
       this.currentTab = settingsTab;
       this.searchFinished = false;
@@ -36,8 +37,6 @@ export class AppComponent {
   }
 
   searchLogs() {
-    if (this.searchFinished) {
-      this.mainService.searchLogs();
-    }
+    this.mainService.searchLogs();
   }
 }
