@@ -1,0 +1,106 @@
+<div class="results-container">
+  <div class="tab-buttons nested-folders">
+    <label class="text-center" *ngIf="isAnyData">Folders</label>
+    <div class="card-container"
+         *ngIf="allFolders.length">
+      <div class="card"
+           [class.selected]="currentFolder === ''"
+           (click)="setCurrentFolder('')">
+        <span>. (total {{totalFound}})</span>
+      </div>
+      <div class="card"
+           [class.selected]="folder === currentFolder"
+           *ngFor="let folder of allFolders"
+           (click)="setCurrentFolder(folder)">
+        <span>{{folder}} ({{folderResultCountsMap[folder]}})</span>
+      </div>
+    </div>
+  </div>
+  <div class="results"
+       *ngIf="!isAnyData">
+    <div class="no-file-selected">
+      No data
+    </div>
+  </div>
+  <div class="results"
+       *ngIf="isAnyData">
+    <div class="options-bar">
+      <div class="search-bar">
+        <form onsubmit="event.preventDefault()" role="search">
+          <label for="search">Search for stuff</label>
+          <input id="search"
+                 type="search"
+                 (search)="search($event)"
+                 placeholder="Type and press enter..."
+                 autofocus />
+          <button type="submit">Go</button>
+        </form>
+      </div>
+      <div class="per-page-options">
+        <div class="form_radio_group">
+          <div class="form_radio_group-item"
+               *ngFor="let perPage of perPageOptions">
+            <input id="radio-{{perPage}}" 
+                   type="radio"
+                   name="radio"
+                   (click)="changePerPage(perPage)"
+                   value="{{perPage}}"
+                   [checked]="currentPerPage === perPage || null">
+            <label for="radio-{{perPage}}">{{perPage}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <div class="form_radio_group">
+          <div class="form_radio_group-item"
+               (click)="clickPrevious()">
+            <input id="radio-previous"
+                   type="radio"
+                   name="radio"
+                   [attr.disabled]="!isPreviousAvailable || null"
+                   [checked]="null">
+            <label for="radio-previous">Previous Page</label>
+          </div>
+          <div class="form_radio_group-item"
+               (click)="clickNext()">
+            <input id="radio-previous"
+                   type="radio"
+                   name="radio"
+                   [disabled]="!isNextAvailable || null"
+                   [checked]="null">
+            <label for="radio-next">Next Page</label>
+          </div>
+        </div>
+      </div>
+      <div class="pagination-status"
+           *ngIf="totalResults > 0">
+        Page {{currentPage}}. Results from {{from}} to {{to}} of {{totalResults}} total.
+      </div>
+      <div class="pagination-status"
+           *ngIf="totalResults === 0">
+        No results found.
+      </div>
+    </div>
+    <div class="no-file-selected"
+         *ngIf="!currentFile">
+      Please select a file
+    </div>
+    <div class="values-container">
+      <pre *ngFor="let item of currentResults">
+      {{item}}
+      </pre>
+    </div>
+  </div>
+  <div class="tab-buttons files">
+    <label class="files-label" *ngIf="isAnyData">Files</label>
+    <div class="card-container"
+         *ngIf="currentFolderFiles.length">
+      <div class="card"
+           [class.selected]="file === currentFile"
+           *ngFor="let file of currentFolderFiles"
+           (click)="selectFile(file)">
+        <span>{{file}} ({{fileResultCountsMap[file]}})</span>
+      </div>
+    </div>
+  </div>
+</div>

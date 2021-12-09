@@ -1,0 +1,39 @@
+<div class="settings-container">
+  <div class="terminal">
+    <label>Choose date</label>
+    <input type="text"
+           [locale]="dateLocale"
+           [showClearButton]="true"
+           [timePicker]="true"
+           [timePicker24Hour]="true"
+           ngxDaterangepickerMd
+           placeholder="Click here to choose"
+           [(ngModel)]="selected"
+           clearLabel
+           class="form-control" />
+  </div>
+
+  <div class="terminal flex">
+    <label>Type path</label>
+    <textarea class="path"
+              rows="4"
+              [(ngModel)]="path">
+    </textarea>
+  </div>
+
+  <div class="terminal"
+       (click)="checkNestedFolders = !checkNestedFolders">
+    <label>Do you wish to check files in the nested folders?</label>
+    <p class="yes-no">
+      {{checkNestedFolders ? 'Yes' : 'No' }}
+    </p>
+  </div>
+
+  <div class="terminal flex">
+    <label>Search for</label>
+    <input class="path"
+           rows="1"
+           placeholder="Type something"
+           [(ngModel)]="searchValue" />
+  </div>
+</div>

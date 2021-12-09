@@ -1,0 +1,53 @@
+.content {
+  &.full-width {
+    max-width: 100%;
+  }
+}
+
+.card {
+  color: black;
+  margin: 0;
+  font-size: 18px;
+
+  &.selected {
+    border: 1px solid;
+  }
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  &-result {
+    width: inherit;
+  }
+}
+
+.card-container {
+  margin-top: 0px;
+
+  &.run-button {
+    .rotating {
+      -webkit-animation: rotating 1s linear infinite;
+      -moz-animation: rotating 1s linear infinite;
+      -ms-animation: rotating 1s linear infinite;
+      -o-animation: rotating 1s linear infinite;
+      animation: rotating 1s linear infinite;
+    }
+  }
+
+  .circle-link.run {
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    /*margin-bottom: 16px;*/
+    margin-right: 16px;
+
+    p {
+      padding-left: 0.2rem;
+    }
+  }
+}
